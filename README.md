@@ -121,6 +121,7 @@ After the collection process, I had 4,860 images that I shuffled and split into 
 
 #### Final results
 
-[![Watch the video]![alt text][image1]](https://youtu.be/sZWqiCoFFnI)
+Watch the video!
+[![Watch the video][image1]](https://youtu.be/sZWqiCoFFnI)
 
 
