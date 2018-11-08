@@ -24,7 +24,7 @@ The goals / steps of this project are the following:
 ---
 ### Files Submitted & Code Quality
 
-#### 1. Submission includes all required files and can be used to run the simulator in autonomous mode
+#### Submission includes all required files and can be used to run the simulator in autonomous mode
 
 My project includes the following files:
 * model.py containing the script to create and train the model
@@ -33,19 +33,19 @@ My project includes the following files:
 * writeup_report.md summarizing the results
 * run1.mp4 and run2.mp4 of the car driving at 7mph and 20mph respectively
 
-#### 2. Submission includes functional code
+#### Submission includes functional code
 Using the Udacity provided simulator and my drive.py file, the car can be driven autonomously around the track by executing 
 ```sh
 python drive.py model_weights_final.h5
 ```
 
-#### 3. Submission code is usable and readable
+#### Submission code is usable and readable
 
 The model.py file contains the code for training and saving the convolution neural network. The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works.
 
 ### Model Architecture and Training Strategy
 
-#### 1. An appropriate model architecture has been employed
+#### An appropriate model architecture has been employed
 
 My model consists of a convolution neural network with 5x5 filter sizes and depths between 6 and 120 (model.py lines 58-101). The model uses image input in both the RGB and HSV color spaces.
 
@@ -53,21 +53,21 @@ The model includes RELU and softmax layers to introduce nonlinearity, and the da
 
 To augment the data, I reversed the images and measurements and added these to the training/validation data.
 
-#### 2. Attempts to reduce overfitting in the model
+#### Attempts to reduce overfitting in the model
 
 The model contains dropout layers in order to reduce overfitting. I also used a smaller network to reduce the chances of overfitting. I also augmented the data by flipping images and using them as training data.
 
-#### 3. Model parameter tuning
+#### Model parameter tuning
 
 The model used an adam optimizer, so the learning rate was not tuned manually (model.py line 105).
 
-#### 4. Appropriate training data
+#### Appropriate training data
 
 Training data was chosen to keep the vehicle driving on the road. I used a combination of center lane driving, recovering from the left and right sides of the road at various points in the track, focused bridge driving and recovery bridge driving, and focused driving on the turn after the bridge.
 
 ### Model Architecture and Training Strategy
 
-#### 1. Solution Design Approach
+#### Solution Design Approach
 
 The overall strategy for deriving a model architecture was to use the simplest one that worked. My first step was to use a convolution neural network model similar to the LeNet architecture. I also played around a bit with the Nvidia architecture, but had issues with running out of memory. I tried using generators with this architecture but found that training was extremely slow. Since my first network worked pretty well on most of the road, I instead focused efforts on improving this network.
 
@@ -77,7 +77,7 @@ In order to gauge how well the model was working, I split my image and steering 
 
 At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road up to about 20mph.
 
-#### 2. Final Model Architecture
+#### Final Model Architecture
 
 The final model architecture (model.py lines 18-24) consisted of a convolution neural network with the following layers and layer sizes:
 - 5x5 convolution layer
@@ -95,9 +95,7 @@ The final model architecture (model.py lines 18-24) consisted of a convolution n
 
 I used 3 merged mini models to form this architecture. The first model handled RGB images for the first 6 layers. The second model handled S images for the first 6 layers. The third and final model merged these outputs and added on the last 6 layers.
 
-I also had to modify drive.py and redefine the model architecture, loading only the trained and saved model weights instead of the whole model (architecture + weights). This was because of some bug in Keras with outdated functions for sequential programming since the recent versions of Keras now use a functional programming design. I wanted to keep the sequential programming logic as taught in this Udacity class, and I was able to get around the bug by redefining the architecture and loading only the weights. I am also able to save the model (architecture + weights), but it can only be loaded in an earlier version of Keras, so I didn't include this file.
-
-#### 3. Creation of the Training Set & Training Process
+#### Creation of the Training Set & Training Process
 
 To capture good driving behavior, I first recorded most of one lap on track one using center lane driving. Here is an example image of center lane driving:
 
@@ -120,3 +118,9 @@ To augment the data set, I also added as input the saturation channel for the im
 ![alt text][image6]
 
 After the collection process, I had 4,860 images that I shuffled and split into 60% for training and 40% for validation after shuffling. I preprocessed the data by cropping the top 50 and lower 20 pixels. I also normalized the pixel values. I used an adam optimizer so that manually training the learning rate wasn't necessary. I found 3 epochs to be a good number for low loss but not overfitting.
+
+#### Final results
+
+[![Watch the video]![alt text][image1]](https://youtu.be/sZWqiCoFFnI)
+
+
